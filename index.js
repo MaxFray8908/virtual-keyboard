@@ -27,20 +27,20 @@ function addKeyboard(language) {
     let keyboardRow = document.querySelectorAll(".keyboard-row")[i];
     for (let j = 0; j < language[i].length; j++) {
       if (language[i][j].length === 1 && language[i][j] !== '▲') {
-        keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_short">${language[i][j]}</button>`);
+        keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_short button_${language[i][j]}">${language[i][j]}</button>`);
       }
       else if (language[i][j] === '▲') {
         keyboardRow.insertAdjacentHTML("beforeend", `<div class="wrapper-button_arrows"> 
-                                                        <button class="button button_arrows">${language[i][j]}</button> 
-                                                        <button class="button button_arrows">${language[i][j+1]}</button> 
+                                                        <button class="button button_arrows button_${language[i][j]}">${language[i][j]}</button> 
+                                                        <button class="button button_arrows button_${language[i][j+1]}">${language[i][j+1]}</button> 
                                                       </div>`);
         j++;
       }
       else if (language[i][j].length === 0){
-        keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_space">${language[i][j]}</button>`);
+        keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_space button_${language[i][j]}">${language[i][j]}</button>`);
       }
       else {
-        keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_long">${language[i][j]}</button>`);
+        keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_long button_${language[i][j]}">${language[i][j]}</button>`);
       }
     }
   }
@@ -48,7 +48,17 @@ function addKeyboard(language) {
 
 function writeSimbol(event) {
   let inputFields = document.querySelector(".input-fields");
-  inputFields.append(event.key);
-  console.log(event.key);
+  let symbol = event.key;  
+  inputFields.append(symbol);
+  let button = document.querySelector(`.button_${symbol}`);
+  button.classList.add('button_click');
 }
+
+function deleteClickButton(event) {
+  let symbol = event.key; 
+  let button = document.querySelector(`.button_${symbol}`);
+  button.classList.remove('button_click');
+}
+
 document.addEventListener('keydown', writeSimbol);
+document.addEventListener('keyup', deleteClickButton);
