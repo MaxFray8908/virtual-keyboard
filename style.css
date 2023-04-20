@@ -17,11 +17,29 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #000000;
+  background-color: #89A178;
 }
 
 .keyboard-row {
   display: flex;
   gap: 5px;
+}
+
+.wrapper-button_arrows {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 2hhuhupx;
+}
+
+.button {
+  border-radius: 50px;
+  border: 1px solid #000000;
+  background-color: #89A178;
 }
 
 .button_short {
