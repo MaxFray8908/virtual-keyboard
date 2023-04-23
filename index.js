@@ -1,64 +1,41 @@
-const keyboardEnglish = [['`','1','2','3','4','5','6','7','8','9','0','-','=','Backspace'],
-                        ['Tab','q','w','e','r','t','y','u','i','o','p','[',']','\\', 'Del'],
-                        ['CapsLock','a','s','d','f','g','h','j','k','l',';','\'','Enter'],
-                        ['Shift','z','x','c','v','b','n','m',',','.','/','Shift'],
-                        ['Ctrl','Win','Alt','','Alt','◀','▲','▼','▶','ctrl']];
-const keyboardRussian = [['ё','1','2','3','4','5','6','7','8','9','0','-','=','Backspace'],
-                        ['Tab','й','ц','у','к','е','н','г','ш','щ','з','х','ъ','\\', 'Del'],
-                        ['CapsLock','ф','ы','в','а','п','р','о','л','д','ж','э','Enter'],
-                        ['Shift','я','ч','с','м','и','т','ь','б','ю','.','В','Shift'],
-                        ['Ctrl','Win','Alt','','Alt','л','н','п','ctrl']];
+import {addInputFields} from "./rendering-page.js";
 
-function addInputFields() {
-  document.body.insertAdjacentHTML("beforeend", `<main class="main">
-                                                    <textarea class="input-fields" spellcheck="false"></textarea>
-                                                    <div class="wrapper-keyboard"></div>
-                                                  </main>`);
-  addKeyboard(keyboardEnglish);
+// const keyboardRussian = [['ё','1','2','3','4','5','6','7','8','9','0','-','=','Backspace'],
+//                         ['Tab','й','ц','у','к','е','н','г','ш','щ','з','х','ъ','\\', 'Del'],
+//                         ['CapsLock','ф','ы','в','а','п','р','о','л','д','ж','э','Enter'],
+//                         ['Shift','я','ч','с','м','и','т','ь','б','ю','.','В','Shift'],
+//                         ['Ctrl','Win','Alt','','Alt','л','н','п','ctrl']];
+
+// function writeSimbol(event) {
+//   let inputFields = document.querySelector(".input-fields");
+//   let symbol = event.key;  
+//   inputFields.append(symbol);
+//   let button = document.querySelector(`.button_${symbol}`);
+//   button.classList.add('button_click');
+// }
+
+// function deleteClickButton(event) {
+//   let symbol = event.key; 
+//   let button = document.querySelector(`.button_${symbol}`);
+//   button.classList.remove('button_click');
+// }
+
+// document.addEventListener('keydown', writeSimbol);
+// document.addEventListener('keyup', deleteClickButton);
+
+function setLocalStorage() {
+  localStorage.setItem("language", language);
 }
-addInputFields();
+window.addEventListener("beforeunload", setLocalStorage)
 
-function addKeyboard(language) {
-  let wrapperKeyboard = document.querySelector(".wrapper-keyboard");
-  wrapperKeyboard.innerHTML = "";
-
-  for (let i = 0; i < language.length; i++) {
-    wrapperKeyboard.insertAdjacentHTML("beforeend", `<div class="keyboard-row"></div>`);
-    let keyboardRow = document.querySelectorAll(".keyboard-row")[i];
-    for (let j = 0; j < language[i].length; j++) {
-      if (language[i][j].length === 1 && language[i][j] !== '▲') {
-        keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_short button_${language[i][j]}">${language[i][j]}</button>`);
-      }
-      else if (language[i][j] === '▲') {
-        keyboardRow.insertAdjacentHTML("beforeend", `<div class="wrapper-button_arrows"> 
-                                                        <button class="button button_arrows button_${language[i][j]}">${language[i][j]}</button> 
-                                                        <button class="button button_arrows button_${language[i][j+1]}">${language[i][j+1]}</button> 
-                                                      </div>`);
-        j++;
-      }
-      else if (language[i][j].length === 0){
-        keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_space button_${language[i][j]}">${language[i][j]}</button>`);
-      }
-      else {
-        keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_long button_${language[i][j]}">${language[i][j]}</button>`);
-      }
-    }
+function getLocalStorage() {
+  let language;
+  if(localStorage.getItem("language") ) {
+    language = localStorage.getItem("language");
   }
+  else {
+    language = "English";
+  }
+  addInputFields(language);
 }
-
-function writeSimbol(event) {
-  let inputFields = document.querySelector(".input-fields");
-  let symbol = event.key;  
-  inputFields.append(symbol);
-  let button = document.querySelector(`.button_${symbol}`);
-  button.classList.add('button_click');
-}
-
-function deleteClickButton(event) {
-  let symbol = event.key; 
-  let button = document.querySelector(`.button_${symbol}`);
-  button.classList.remove('button_click');
-}
-
-document.addEventListener('keydown', writeSimbol);
-document.addEventListener('keyup', deleteClickButton);
+window.addEventListener("load", getLocalStorage)
