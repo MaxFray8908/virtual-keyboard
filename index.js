@@ -1,27 +1,17 @@
-import {addInputFields} from "./rendering-page.js";
+import {addInputFields, addKeyboard} from "./rendering-page.js";
+import {addClickButton, deleteClickButton} from "./clickButton.js"
 
-// const keyboardRussian = [['ё','1','2','3','4','5','6','7','8','9','0','-','=','Backspace'],
-//                         ['Tab','й','ц','у','к','е','н','г','ш','щ','з','х','ъ','\\', 'Del'],
-//                         ['CapsLock','ф','ы','в','а','п','р','о','л','д','ж','э','Enter'],
-//                         ['Shift','я','ч','с','м','и','т','ь','б','ю','.','В','Shift'],
-//                         ['Ctrl','Win','Alt','','Alt','л','н','п','ctrl']];
+let language;
 
-// function writeSimbol(event) {
-//   let inputFields = document.querySelector(".input-fields");
-//   let symbol = event.key;  
-//   inputFields.append(symbol);
-//   let button = document.querySelector(`.button_${symbol}`);
-//   button.classList.add('button_click');
-// }
+export function changeLanguage() {
+  language = language === "English" ? "Russian" : "English";
+  addKeyboard(language);
+  document.querySelector(`.button_17`).classList.add("button_click");
+  document.querySelector(`.button_18`).classList.add("button_click");
+}
 
-// function deleteClickButton(event) {
-//   let symbol = event.key; 
-//   let button = document.querySelector(`.button_${symbol}`);
-//   button.classList.remove('button_click');
-// }
-
-// document.addEventListener('keydown', writeSimbol);
-// document.addEventListener('keyup', deleteClickButton);
+document.addEventListener('keydown', (event) => addClickButton(event, language));
+document.addEventListener('keyup', (event) => deleteClickButton(event));
 
 function setLocalStorage() {
   localStorage.setItem("language", language);
@@ -29,8 +19,7 @@ function setLocalStorage() {
 window.addEventListener("beforeunload", setLocalStorage)
 
 function getLocalStorage() {
-  let language;
-  if(localStorage.getItem("language") ) {
+  if(localStorage.getItem("language") === "English" || localStorage.getItem("language") === "Russian") {
     language = localStorage.getItem("language");
   }
   else {
