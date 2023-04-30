@@ -1,5 +1,6 @@
 import {addInputFields, addKeyboard} from "./rendering-page.js";
-import {addClickButton as addClickButtonPhysical, deleteClickButton as deleteClickButtonPhysical} from "./clickButtonPhysical.js"
+import {addClickButton as addClickButtonPhysical, deleteClickButton as deleteClickButtonPhysical} from "./clickButtonPhysical.js";
+import {addClickButton as addClickButtonDigital, deleteClickButton as deleteClickButtonDigital} from "./clickButtonDigital.js";
 
 let language;
 
@@ -12,6 +13,9 @@ export function changeLanguage() {
 
 document.addEventListener('keydown', (event) => addClickButtonPhysical(event, language));
 document.addEventListener('keyup', (event) => deleteClickButtonPhysical(event));
+
+document.addEventListener("mousedown", (event) => addClickButtonDigital(event, language));
+document.addEventListener("mouseup", (event) => deleteClickButtonDigital(event, language));
 
 function setLocalStorage() {
   localStorage.setItem("language", language);
