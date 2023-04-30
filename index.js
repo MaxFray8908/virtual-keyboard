@@ -1,5 +1,5 @@
 import {addInputFields, addKeyboard} from "./rendering-page.js";
-import {addClickButton, deleteClickButton} from "./clickButton.js"
+import {addClickButton as addClickButtonPhysical, deleteClickButton as deleteClickButtonPhysical} from "./clickButtonPhysical.js"
 
 let language;
 
@@ -10,8 +10,8 @@ export function changeLanguage() {
   document.querySelector(`.button_18`).classList.add("button_click");
 }
 
-document.addEventListener('keydown', (event) => addClickButton(event, language));
-document.addEventListener('keyup', (event) => deleteClickButton(event));
+document.addEventListener('keydown', (event) => addClickButtonPhysical(event, language));
+document.addEventListener('keyup', (event) => deleteClickButtonPhysical(event));
 
 function setLocalStorage() {
   localStorage.setItem("language", language);
