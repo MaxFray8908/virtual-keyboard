@@ -5,6 +5,10 @@ export function addInputFields(language) {
   document.body.insertAdjacentHTML("beforeend", `<main class="main">
                                                     <textarea class="input-fields" spellcheck="false"></textarea>
                                                     <div class="wrapper-keyboard"></div>
+                                                    <div class="wrapper-description">
+                                                      <p class="description">Операционная система: Windows</p>
+                                                      <p class="description">Смена языковой раскладки: Left Ctr + Left Alt</p>
+                                                    </div>
                                                   </main>`);
   addKeyboard(language);
 }

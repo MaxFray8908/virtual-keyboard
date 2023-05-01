@@ -1,6 +1,13 @@
+.body {
+  background-image: url("./img_background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Montserrat', sans-serif;
+}
+
 .main {
-  width: 40%;
-  margin: 0 auto;
+  width: 720px;
+  margin: 100px auto 0;
 }
   
 .input-fields {
@@ -11,10 +18,20 @@
   resize: none;
   border: 1px solid #000000;
   border-radius: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
 
   &:focus {
     outline: none;
   }
+}
+
+.wrapper-description {
+  margin-top: 5px;
+  padding: 10px;
+  background-color: #cbd5c3;
+  border: 1px solid #000000;
+  border-radius: 20px;
 }
 
 //keyboard
@@ -49,6 +66,7 @@
   transition: all 0.1s;
   transition: background-color 0.5s;
   cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
 
   &:hover:not(.button_active) {
     background-color: #cbd5c3;
