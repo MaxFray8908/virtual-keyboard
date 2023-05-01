@@ -12,10 +12,10 @@ let altLeft;
 function searchKey(arr, symbol) {
   let key;
   arr.forEach(elem => {  
-    if (elem.code == symbol) { key = elem }; 
+    if (elem.code == symbol) { key = elem } 
   });
   return key;
-};
+}
 
 export function addClickButton(event, language) {
   let symbol = searchKey(language === "English" ? keyboardEnglish : keyboardRussian, event.code);
