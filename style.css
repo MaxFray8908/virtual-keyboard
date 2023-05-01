@@ -60,4 +60,8 @@
 .button_click {
   transform: translate(1.5px, 2px);
   box-shadow: none;
+}
+
+.button_active {
+  background-color: #5F7054;
 }/*# sourceMappingURL=style.css.map */

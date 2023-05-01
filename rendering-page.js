@@ -9,7 +9,7 @@ export function addInputFields(language) {
   addKeyboard(language);
 }
   
-export function addKeyboard(language) {
+export function addKeyboard(language, capsLock, shift) {
   language = language === "English" ? keyboardEnglish : keyboardRussian;
   let wrapperKeyboard = document.querySelector(".wrapper-keyboard");
   wrapperKeyboard.innerHTML = "";
@@ -22,25 +22,32 @@ export function addKeyboard(language) {
     }
 
     let keyboardRow = document.querySelectorAll(".keyboard-row")[numberKeyboardRow-1];
+    let writeSymbol = shift && item.shiftKey ? item.shiftKey : item.key;
     
     if (item.group === "alphanumeric") {
-      keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_short button_${item.keyCode}">${item.key}</button>`);
+      if ((capsLock && !shift) || (!capsLock && shift)) { 
+        keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_short ${item.code}">${writeSymbol.toUpperCase()}</button>`); 
+      }
+      else { keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_short ${item.code}">${writeSymbol}</button>`); }
     }
     else if (item.group === "editing" || item.group === "control") {
-      keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_long button_${item.keyCode}">${item.key}</button>`);
+      keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_long ${item.code}">${writeSymbol}</button>`);
     }
     else if (item.group === "space") {
-      keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_space button_${item.keyCode}">${item.key}</button>`);
+      keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_space ${item.code}">${writeSymbol}</button>`);
     }
     else if (item.key === "▲") {
       keyboardRow.insertAdjacentHTML("beforeend", `<div class="wrapper-button_arrows"></div>`);
-      document.querySelector(".wrapper-button_arrows").insertAdjacentHTML("beforeend", `<button class="button button_arrows button_${item.keyCode}">${item.key}</button>`);                                     
+      document.querySelector(".wrapper-button_arrows").insertAdjacentHTML("beforeend", `<button class="button button_arrows ${item.code}">${writeSymbol}</button>`);                                     
     }
     else if (item.key === "▼") {
-      document.querySelector(".wrapper-button_arrows").insertAdjacentHTML("beforeend", `<button class="button button_arrows button_${item.keyCode}">${item.key}</button>`);
+      document.querySelector(".wrapper-button_arrows").insertAdjacentHTML("beforeend", `<button class="button button_arrows ${item.code}">${writeSymbol}</button>`);
     }
     else if (item.group === "cursor-control") {
-      keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_short button_${item.keyCode}">${item.key}</button>`);
+      keyboardRow.insertAdjacentHTML("beforeend", `<button class="button button_short ${item.code}">${writeSymbol}</button>`);
     }
   }
+
+  if (capsLock) { document.querySelector(".CapsLock").classList.add("button_active")};
+  if (shift) { document.querySelector(".ShiftLeft").classList.add("button_active")};
 }
