@@ -24,19 +24,20 @@ export function addClickButton(event, language) {
 
   if (event.code === "ControlLeft") { controlLeft = true; }
   if (event.code === "AltLeft") { altLeft = true; }
+  console.log(controlLeft);
+  console.log(altLeft);
   if (event.code === "AltLeft" && controlLeft || event.code === "ControlLeft" && altLeft) { changeLanguage(); }
   if (buttonClick.innerText === "Shift") {
     if (event.repeat === false) { changeShift(); }
   }
-  
-  buttonClick.classList.add("button_click");
+  if (event.code === "AltRight") { document.querySelector(`.AltRight`).classList.add("button_click"); }
+  else { buttonClick.classList.add("button_click"); }
   writeSimbol(symbol, buttonClick.innerText);
-
 }
 
 export function deleteClickButton(event) {
-  controlLeft = false;
-  altLeft = false;
+  if (event.code === "ControlLeft") { controlLeft = false; }
+  if (event.code === "AltLeft") { altLeft = false; }
   if (buttonClick.innerText === "CapsLock") {changeCapsLock(); }
   buttonClick = document.querySelector(`.${event.code}`);
 
