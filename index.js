@@ -9,8 +9,8 @@ export let shift = false;
 export function changeLanguage() {
   language = language === "English" ? "Russian" : "English";
   addKeyboard(language, capsLock, shift);
-  document.querySelector(`.button_17`).classList.add("button_click");
-  document.querySelector(`.button_18`).classList.add("button_click");
+  document.querySelector(`.ControlLeft`).classList.add("button_click");
+  document.querySelector(`.AltLeft`).classList.add("button_click");
 }
 
 export function changeCapsLock() {
@@ -23,8 +23,8 @@ export function changeShift() {
   addKeyboard(language, capsLock, shift);
 }
 
-// document.addEventListener('keydown', (event) => addClickButtonPhysical(event, language));
-// document.addEventListener('keyup', (event) => deleteClickButtonPhysical(event));
+document.addEventListener('keydown', (event) => addClickButtonPhysical(event, language));
+document.addEventListener('keyup', (event) => deleteClickButtonPhysical(event));
 
 document.addEventListener("mousedown", (event) => addClickButtonDigital(event, language));
 document.addEventListener("mouseup", (event) => deleteClickButtonDigital(event, language));

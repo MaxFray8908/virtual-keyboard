@@ -1,46 +1,48 @@
 import {keyboardRussian} from "./language-Russian.js";
 import {keyboardEnglish} from "./language-English.js";
 import {changeLanguage} from "./index.js";
+import {changeCapsLock} from "./index.js";
+import {changeShift} from "./index.js";
+import {writeSimbol} from "./writeSymbol.js";
 
-function searchKey(arr, keyCode) {
+let buttonClick;
+let controlLeft;
+let altLeft;
+
+function searchKey(arr, symbol) {
   let key;
   arr.forEach(elem => {  
-    if (elem.keyCode == keyCode) { key = elem}; 
+    if (elem.code == symbol) { key = elem }; 
   });
   return key;
 };
 
-function writeSimbol(symbol) {
-  let inputFields = document.querySelector(".input-fields");
-  if (symbol.group === "alphanumeric") { inputFields.append(symbol.key); }
-}
-
 export function addClickButton(event, language) {
-  let button;
-  let symbol = searchKey(language === "English" ? keyboardEnglish : keyboardRussian, event.keyCode)
-  console.log(event.code);
-  if (event.code === "AltLeft" && event.ctrlKey || event.code === "ControlLeft" && event.altKey) { changeLanguage(); }
+  let symbol = searchKey(language === "English" ? keyboardEnglish : keyboardRussian, event.code);
+  buttonClick = document.querySelector(`.${event.code}`);
+  event.preventDefault();
 
-  if (event.code === "ShiftRight" || event.code === "AltRight" || event.code === "ControlRight") {
-    button = document.querySelectorAll(`.button_${event.keyCode}`)[1];
+  if (event.code === "ControlLeft") { controlLeft = true; }
+  if (event.code === "AltLeft") { altLeft = true; }
+  if (event.code === "AltLeft" && controlLeft || event.code === "ControlLeft" && altLeft) { changeLanguage(); }
+  if (buttonClick.innerText === "Shift") {
+    if (event.repeat === false) { changeShift(); }
   }
-  else {
-    button = document.querySelector(`.button_${event.keyCode}`);
-  }
-    
-  button.classList.add('button_click');
-  writeSimbol(symbol);
+  
+  buttonClick.classList.add("button_click");
+  writeSimbol(symbol, buttonClick.innerText);
+
 }
 
 export function deleteClickButton(event) {
-  let button;
-  
-  if (event.code === "ShiftRight" || event.code === "AltRight" || event.code === "ControlRight") {
-    button = document.querySelectorAll(`.button_${event.keyCode}`)[1];
+  controlLeft = false;
+  altLeft = false;
+  if (buttonClick.innerText === "CapsLock") {changeCapsLock(); }
+  buttonClick = document.querySelector(`.${event.code}`);
+
+  if (buttonClick.innerText === "Shift") { 
+    changeShift();
+    buttonClick.classList.remove('button_active'); 
   }
-  else {
-    button = document.querySelector(`.button_${event.keyCode}`);
-  }
-  
-  button.classList.remove('button_click');
+  buttonClick.classList.remove('button_click');
 }
