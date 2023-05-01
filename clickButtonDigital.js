@@ -13,7 +13,6 @@ function searchKey(arr, symbol) {
   return key;
 };
 
-
 function writeSimbol(symbol, writeSimbol) {
   let inputFields = document.querySelector(".input-fields");
 

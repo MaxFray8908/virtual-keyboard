@@ -12,6 +12,9 @@
   border: 1px solid #000000;
   border-radius: 20px;
 }
+.input-fields:focus {
+  outline: none;
+}
 
 .wrapper-keyboard {
   display: flex;
@@ -42,6 +45,11 @@
   background-color: #89A178;
   box-shadow: 1.5px 2px #5b6e4d;
   transition: all 0.1s;
+  transition: background-color 0.5s;
+  cursor: pointer;
+}
+.button:hover:not(.button_active) {
+  background-color: #cbd5c3;
 }
 
 .button_short {
