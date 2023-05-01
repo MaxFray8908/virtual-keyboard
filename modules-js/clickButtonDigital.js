@@ -1,7 +1,7 @@
 import {keyboardRussian} from "./language-Russian.js";
 import {keyboardEnglish} from "./language-English.js";
-import {changeCapsLock} from "./index.js";
-import {changeShift} from "./index.js";
+import {changeCapsLock} from "../index.js";
+import {changeShift} from "../index.js";
 import {writeSimbol} from "./writeSymbol.js";
 
 let buttonClick;

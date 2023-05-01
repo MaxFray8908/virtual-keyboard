@@ -1,6 +1,6 @@
-import {addInputFields, addKeyboard} from "./rendering-page.js";
-import {addClickButton as addClickButtonPhysical, deleteClickButton as deleteClickButtonPhysical} from "./clickButtonPhysical.js";
-import {addClickButton as addClickButtonDigital, deleteClickButton as deleteClickButtonDigital} from "./clickButtonDigital.js";
+import {addInputFields, addKeyboard} from "./modules-js/rendering-page.js";
+import {addClickButton as addClickButtonPhysical, deleteClickButton as deleteClickButtonPhysical} from "./modules-js/clickButtonPhysical.js";
+import {addClickButton as addClickButtonDigital, deleteClickButton as deleteClickButtonDigital} from "./modules-js/clickButtonDigital.js";
 
 let language;
 export let capsLock = false;
