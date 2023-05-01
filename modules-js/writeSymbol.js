@@ -45,8 +45,8 @@ export function writeSimbol(symbol, writeSimbol) {
     let countSymbol = inputFields.selectionStart - prevPosNewLine;
     let posNewLine = inputFields.value.indexOf("\n", inputFields.selectionStart);
 
-    if (inputFields.value.indexOf("\n", posNewLine + 1) - posNewLine === 1) {
-      inputFields.selectionStart = posNewLine + 1;
+    if (countSymbol > inputFields.value.indexOf("\n", posNewLine + 1) - posNewLine && inputFields.value.indexOf("\n", posNewLine + 1) !== -1) {
+      inputFields.selectionStart = inputFields.value.indexOf("\n", posNewLine + 1);
     }
     else {
       inputFields.selectionStart = posNewLine + countSymbol;
