@@ -13,7 +13,7 @@ export function addInputFields(language) {
   addKeyboard(language);
 }
   
-export function addKeyboard(language, capsLock, shift) {
+export function addKeyboard(language, capsLock, shift, buttonShift) {
   language = language === "English" ? keyboardEnglish : keyboardRussian;
   let wrapperKeyboard = document.querySelector(".wrapper-keyboard");
   wrapperKeyboard.innerHTML = "";
@@ -54,7 +54,7 @@ export function addKeyboard(language, capsLock, shift) {
 
   if (capsLock) { document.querySelector(".CapsLock").classList.add("button_active"); }
   if (shift) { 
-    document.querySelector(".ShiftLeft").classList.add("button_active");
-    document.querySelector(".ShiftLeft").classList.add('button_click');
+    document.querySelector(`.${buttonShift}`).classList.add("button_active");
+    document.querySelector(`.${buttonShift}`).classList.add("button_click");
   }
 }

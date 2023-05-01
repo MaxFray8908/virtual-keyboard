@@ -8,6 +8,7 @@ import {writeSimbol} from "./writeSymbol.js";
 let buttonClick;
 let controlLeft;
 let altLeft;
+let shift;
 
 function searchKey(arr, symbol) {
   let key;
@@ -24,13 +25,16 @@ export function addClickButton(event, language) {
 
   if (event.code === "ControlLeft") { controlLeft = true; }
   if (event.code === "AltLeft") { altLeft = true; }
-  console.log(controlLeft);
-  console.log(altLeft);
   if (event.code === "AltLeft" && controlLeft || event.code === "ControlLeft" && altLeft) { changeLanguage(); }
   if (buttonClick.innerText === "Shift") {
-    if (event.repeat === false) { changeShift(); }
+    if (event.repeat === false) { 
+      shift = event.code;
+      changeShift(shift); 
+    }
   }
   if (event.code === "AltRight") { document.querySelector(`.AltRight`).classList.add("button_click"); }
+  if (buttonClick.innerText === "CapsLock") { if (event.repeat === false) { changeCapsLock(shift); }}
+
   else { buttonClick.classList.add("button_click"); }
   writeSimbol(symbol, buttonClick.innerText);
 }
@@ -38,7 +42,7 @@ export function addClickButton(event, language) {
 export function deleteClickButton(event) {
   if (event.code === "ControlLeft") { controlLeft = false; }
   if (event.code === "AltLeft") { altLeft = false; }
-  if (buttonClick.innerText === "CapsLock") {changeCapsLock(); }
+  
   buttonClick = document.querySelector(`.${event.code}`);
 
   if (buttonClick.innerText === "Shift") { 

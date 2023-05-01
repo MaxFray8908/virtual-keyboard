@@ -177,7 +177,8 @@ export const keyboardEnglish = [
 		"group": "alphanumeric",
 	},
 	{
-		"key": "|",
+		"key": "\\",
+		"shiftKey": "|",
 		"code": "Backslash",
 		"row": "2",
 		"group": "alphanumeric",

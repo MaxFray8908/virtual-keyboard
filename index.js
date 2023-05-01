@@ -8,19 +8,20 @@ export let shift = false;
 
 export function changeLanguage() {
   language = language === "English" ? "Russian" : "English";
+  shift = false;
   addKeyboard(language, capsLock, shift);
   document.querySelector(`.ControlLeft`).classList.add("button_click");
   document.querySelector(`.AltLeft`).classList.add("button_click");
 }
 
-export function changeCapsLock() {
+export function changeCapsLock(buttonShift) {
   capsLock = !capsLock;
-  addKeyboard(language, capsLock, shift);
+  addKeyboard(language, capsLock, shift, buttonShift);
 }
 
-export function changeShift() {
+export function changeShift(buttonShift) {
   shift = !shift;
-  addKeyboard(language, capsLock, shift);
+  addKeyboard(language, capsLock, shift, buttonShift);
 }
 
 document.addEventListener('keydown', (event) => addClickButtonPhysical(event, language));
